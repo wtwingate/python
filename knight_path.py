@@ -4,6 +4,29 @@ import re
 # move from one square to another on a chessboard.
 
 
+RANKS = {
+    "1": 0,
+    "2": 1,
+    "3": 2,
+    "4": 3,
+    "5": 4,
+    "6": 5,
+    "7": 6,
+    "8": 7,
+}
+
+FILES = {
+    "a": 0,
+    "b": 1,
+    "c": 2,
+    "d": 3,
+    "e": 4,
+    "f": 5,
+    "g": 6,
+    "h": 7,
+}
+
+
 class Knight:
     def __init__(self, coords, prev=None):
         self.coords = coords
@@ -26,43 +49,9 @@ class Knight:
             next_coords = []
             next_coords.append(self.coords[0] + delta[0])
             next_coords.append(self.coords[1] + delta[1])
-
             if 0 <= next_coords[0] <= 7 and 0 <= next_coords[1] <= 7:
                 coords.append(next_coords)
         return coords
-
-
-class Translator:
-    def __init__(self):
-        self.__translator_keys = {
-            "1": 0,
-            "2": 1,
-            "3": 2,
-            "4": 3,
-            "5": 4,
-            "6": 5,
-            "7": 6,
-            "8": 7,
-            "a": 0,
-            "b": 1,
-            "c": 2,
-            "d": 3,
-            "e": 4,
-            "f": 5,
-            "g": 6,
-            "h": 7,
-        }
-
-    def standard_to_numeric(self, start_pos, end_pos):
-        trans_start = []
-        trans_end = []
-
-        trans_start.append(self.__translator_keys[start_pos[0]])
-        trans_start.append(self.__translator_keys[start_pos[1]])
-        trans_end.append(self.__translator_keys[end_pos[0]])
-        trans_end.append(self.__translator_keys[end_pos[1]])
-
-        return trans_start, trans_end
 
 
 def find_path(start_pos, end_pos):
@@ -90,25 +79,31 @@ def print_path(path):
     print(f"You reached your destination in {len(path)} moves!")
     print("Here is your path:")
     for pos in path:
-        print(pos)
+        print(translate_coords(pos), end=" ")
+    print()
 
 
-def get_start_pos():
-    start_pos = None
-    while not valid_input(start_pos):
-        start_pos = input("Please enter your starting coordinates: ")
-    return start_pos
+def translate_coords(position):
+    for key, value in FILES.items():
+        if value == position[0]:
+            file = key
+    for key, value in RANKS.items():
+        if value == position[1]:
+            rank = key
+    return file + rank
 
 
-def get_end_pos():
-    end_pos = None
-    while not valid_input(end_pos):
-        end_pos = input("Please enter your starting coordinates: ")
-    return end_pos
+def get_position():
+    position = None
+    while True:
+        position = input("Please enter your starting coordinates: ").lower()
+        if valid_input(position):
+            break
+    return position
 
 
 def valid_input(input):
-    if len(input) != 2:
+    if input == None:
         return False
     elif re.match("^[a-h][1-8]$", input):
         return True
@@ -116,10 +111,17 @@ def valid_input(input):
         return False
 
 
+def translate_notation(position):
+    translated_pos = []
+    translated_pos.append(FILES[position[0]])
+    translated_pos.append(RANKS[position[1]])
+    return translated_pos
+
+
 def main():
-    start = [0, 0]
-    end = [7, 7]
-    print_path(extract_path(find_path(start, end)))
+    start_pos = translate_notation(get_position())
+    end_pos = translate_notation(get_position())
+    print_path(extract_path(find_path(start_pos, end_pos)))
 
 
 main()
