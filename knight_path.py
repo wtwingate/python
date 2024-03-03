@@ -93,10 +93,10 @@ def translate_coords(position):
     return file + rank
 
 
-def get_position():
+def get_position(pos_name):
     position = None
     while True:
-        position = input("Please enter your starting coordinates: ").lower()
+        position = input(f"Enter your {pos_name} position: ").lower()
         if valid_input(position):
             break
     return position
@@ -118,9 +118,27 @@ def translate_notation(position):
     return translated_pos
 
 
+def introduction():
+    print(
+        """
+This program caculates the shortest path for a Knight to move
+between any two locations on a chessboard.
+
+Simply enter your starting and ending positions using standard
+"file-first" algebraic notation (files are labeled a - h, and
+ranks are labeled 1 - 8.) Then, sit back and watch the algorithm
+do its magic!
+
+Note: there are often multiple "shortest" paths that a Knight
+can take. This program only prints out the first one it finds.
+"""
+    )
+
+
 def main():
-    start_pos = translate_notation(get_position())
-    end_pos = translate_notation(get_position())
+    introduction()
+    start_pos = translate_notation(get_position("starting"))
+    end_pos = translate_notation(get_position("ending"))
     print_path(extract_path(find_path(start_pos, end_pos)))
 
 
