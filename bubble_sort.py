@@ -5,9 +5,9 @@ def main():
     my_list = []
     for i in range(20):
         my_list.append(randint(0, 99))
-    print(my_list)
+    print("Unsorted: ", my_list)
     bubble_sort(my_list)
-    print(my_list)
+    print("Sorted:   ", my_list)
 
 
 def bubble_sort(my_list):

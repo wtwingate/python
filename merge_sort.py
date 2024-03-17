@@ -5,8 +5,8 @@ def main():
     my_list = []
     for i in range(20):
         my_list.append(randint(0, 99))
-    print(my_list)
-    print(merge_sort(my_list))
+    print("Unsorted: ", my_list)
+    print("Sorted:   ", merge_sort(my_list))
 
 
 def merge_sort(my_list):
