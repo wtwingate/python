@@ -16,6 +16,7 @@ def main():
 
 
 def prime_factors(n):
+    """Find the prime factors of any positive integer"""
     factors = []
     while n % 2 == 0:
         factors.append(2)
