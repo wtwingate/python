@@ -8,8 +8,7 @@ def main():
     for i in range(20):
         short_list.append(randint(0, 99))
     print("Unsorted: ", short_list)
-    insertion_sort(short_list)
-    print("Sorted:   ", short_list)
+    print("Sorted:   ", insertion_sort(short_list))
     for i in range(10000):
         long_list.append(randint(0, 9999))
     print("Sorting list with 10,000 elements:")
