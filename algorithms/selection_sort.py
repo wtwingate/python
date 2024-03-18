@@ -18,6 +18,7 @@ def main():
 
 
 def selection_sort(my_list):
+    """Sort list using selection sort algorithm"""
     for i in range(len(my_list)):
         smallest = i
         for j in range(i + 1, len(my_list)):
