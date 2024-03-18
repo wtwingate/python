@@ -1,20 +1,12 @@
 from random import randint
-import time
 
 
 def main():
-    short_list = []
-    long_list = []
+    my_list = []
     for i in range(20):
-        short_list.append(randint(0, 99))
-    print("Unsorted: ", short_list)
-    print("Sorted:   ", quick_sort(short_list, 0, len(short_list) - 1))
-    for i in range(10000):
-        long_list.append(randint(0, 9999))
-    print("Sorting list with 10,000 elements:")
-    start = time.time()
-    quick_sort(long_list, 0, len(long_list) - 1)
-    print(f"Sorted in {time.time() - start} seconds")
+        my_list.append(randint(0, 99))
+    print("Unsorted: ", my_list)
+    print("Sorted:   ", quick_sort(my_list, 0, len(my_list) - 1))
 
 
 def quick_sort(my_list, low, high):
