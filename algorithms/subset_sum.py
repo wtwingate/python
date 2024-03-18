@@ -19,6 +19,7 @@ def subset_sum(nums, target):
 
 
 def find_subset_sum(nums, target, index):
+    """Return true if set contains subset equal to target"""
     if target == 0:
         return True
     if index < 0 and target != 0:
